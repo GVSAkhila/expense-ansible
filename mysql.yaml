@@ -1,4 +1,4 @@
-- name: mysql configuration
+ - name: mysql configuration
   hosts: mysql
   become: yes
   task:
