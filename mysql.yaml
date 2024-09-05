@@ -18,10 +18,9 @@
 
     - name: connect to mysql server
       community.mysql.mysql_info:    
-        login_user: root
-        login_password: "{{ mysql_passd }}"
-        login_host: "{{ login_host }}"
-      ignore_erros: true  
+       login_user: root
+       login_password: "{{ mysql_passd }}"
+       login_host: "{{ login_host }}"
       register: mysql_info
 
     - name: print the mysql info
