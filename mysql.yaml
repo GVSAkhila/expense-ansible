@@ -1,28 +1,28 @@
 - name: mysql configuration
   hosts: mysql
   become: yes
-  tasks:
   vars:
-   mysql_passd: ExpenseApp@1
-   login_host: mysql.joinsankardevops.online
-  - name: installing mysql server
-    ansible.builtin.package:
-      name: mysql-server
-      state: present
+    mysql_passd: ExpenseApp@1
+    login_host: mysql.joinsankardevops.online
+  tasks:
+    - name: installing mysql server
+      ansible.builtin.package:
+        name: mysql-server
+        state: present
 
-  - name: enable and start mysqld service
-    ansible.builtin.service:
-      name: mysqld
-      state: started
-      enabled: yes    
+    - name: enable and start mysqld service
+      ansible.builtin.service:
+        name: mysqld
+        state: started
+        enabled: yes    
 
-  - name: connect mysql server
-    community.mysql.mysql_info:    
-      login_user: root
-      login_password: "{{ mysql_passd }}"
-      login_host: "{{ login_host }}"
+    - name: connect to mysql server
+      community.mysql.mysql_info:    
+        login_user: root
+        login_password: "{{ mysql_passd }}"
+        login_host: "{{ login_host }}"
       register: mysql_info
 
-  - name: print the mysql info
-    ansible.builtin.debug:
-      msg: "{{ mysql_info }}"    
+    - name: print the mysql info
+      ansible.builtin.debug:
+        msg: "{{ mysql_info }}"
