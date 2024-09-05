@@ -3,8 +3,8 @@
   become: yes
   tasks:
   vars:
-  mysql_passd: ExpenseApp@1
-  login_host: mysql.joinsankardevops.online
+   mysql_passd: ExpenseApp@1
+   login_host: mysql.joinsankardevops.online
   - name: installing mysql server
     ansible.builtin.package:
       name: mysql-server
