@@ -5,11 +5,11 @@
     mysql_passd: ExpenseApp@1
     login_host: mysql.joinsankardevops.online
   tasks:
-    - name: install the mysql packge
+    - name: install the pymysql packge
       ansible.builtin.pip:
        name:
         - PyMySQL
-      executable: pip3.9  
+       executable: pip3.9  
 
     - name: installing mysql server
       ansible.builtin.package:
