@@ -1,20 +1,20 @@
-- name : configure the backend
+- name: configure the backend
   hosts: backend
-  become: yes 
-  taks:
-  - name: disable  default nodejs
-    ansible.builtin.command: dnf module disable nodejs -y
+  become: yes
+  tasks:
+    - name: disable default nodejs
+      ansible.builtin.command:
+        cmd: dnf module disable nodejs -y
 
+    - name: enable nodejs 20
+      ansible.builtin.command:
+        cmd: dnf module enable nodejs:20 -y
 
-  - name: enable nodejs 20
-    ansible.builtin.command: dnf module enable nodejs:20 -y  
+    - name: install nodejs
+      ansible.builtin.package:
+        name: nodejs  # Fixed the package name, removing the space
+        state: present  # Fixed spelling from "prasent" to "present"
 
-  - name: install node js
-    ansible.builtin.package:
-     name: node js
-     state: prasent
-
-  - name: create user
-    ansible.builtin.user:
-     name: expense     
-       
+    - name: create user
+      ansible.builtin.user:
+        name: expense
