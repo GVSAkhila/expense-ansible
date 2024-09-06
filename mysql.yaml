@@ -4,14 +4,15 @@
   vars:
     mysql_passd: ExpenseApp@1
     login_host: mysql.joinsankardevops.online
-  tasks:
-    - name: install the pymysql packge
-      ansible.builtin.pip:
-       name:
-        - PyMySQL
-       executable: pip3.9  
 
-    - name: installing mysql server
+  tasks:
+    - name: install the PyMySQL package
+      ansible.builtin.pip:
+        name:
+          - PyMySQL
+        executable: pip3.9  
+
+    - name: install mysql server
       ansible.builtin.package:
         name: mysql-server
         state: present
@@ -24,9 +25,9 @@
 
     - name: connect to mysql server
       community.mysql.mysql_info:    
-       login_user: root
-       login_password: "{{ mysql_passd }}"
-       login_host: "{{ login_host }}"
+        login_user: root
+        login_password: "{{ mysql_passd }}"
+        login_host: "{{ login_host }}"
       ignore_errors: true 
       register: mysql_info
 
@@ -35,5 +36,6 @@
         msg: "{{ mysql_info }}"
 
     - name: setup MySQL root password
-      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_passd }}"
-      when: mysql_info.failed is true    
+      ansible.builtin.command: 
+        cmd: "mysqladmin -u root password '{{ mysql_passd }}'"
+      when: mysql_info.failed is true
